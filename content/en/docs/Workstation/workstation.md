@@ -21,8 +21,6 @@ Workstation is especially valuable in manufacturing and industrial environments 
   - Local File System  
   - Windows Printers (coming soon)
 
-- **Device Simulation**  
-  Useful for development, testing, and demos when real hardware isn’t available. (TCP_IP Server)?
 ### 1.2 How It Works
 
 Mendix Workstation consists of **three core components**: the **Workstation Management** for centralized configuration, the **Workstation Agent** for real-time communication with local hardware, and the **Workstation Connector** for app integration. Together, they ensure secure, efficient, and scalable interactions between applications and devices.
@@ -93,14 +91,12 @@ Together, these components enable Mendix applications to securely and efficientl
 
 Before installing Mendix Workstation, ensure the following requirements are met:
 
-- **System Requirements**: <span style="color:red;">[WIP]</span>  
-  - Windows 10 or later (64-bit)  
-  - Minimum 4 GB RAM (8 GB recommended)  
-  - At least 2 GHz dual-core processor  
-  - 500 MB of free disk space  
+- **System Requirements**:  
+  - **Operating System**: Windows 10 or Windows 11 (64-bit)  
+  - **Memory**: Minimum 4 GB RAM (8 GB recommended for optimal performance)
+  - **Disk Space**: 400 MB of free disk space for installation  
 
-- **Required Permissions**:  
-  - Administrator rights to install the Workstation Agent. <span style="color:red;">(Still the case right?)</span>  
+- **Access Requirements**:  
   - A Mendix account  
   - Access to the Mendix Workstation Management for configuration.  
 
@@ -116,14 +112,11 @@ Before installing Mendix Workstation, ensure the following requirements are met:
 Follow these steps to install Mendix Workstation:
 
 1. **Download the Installer**:  
-   - Visit the official Mendix Workstation page and download the latest version of the installer.<span style="color:red;">[Currently available within the Workstation Management]]</span>
+   - Visit the official Mendix Workstation page and download the latest version of the installer. Currently available within the Workstation Management]
 
 2. **Run the Installer**:  
    - Double-click the downloaded file and follow the on-screen instructions.
    - During installation or first use, ensure to grant network access or firewall permissions if prompted by the operating system
-   - Accept the license agreement.<span style="color:red;">[Do we have that at the moment? Stephane demoed it]</span>
-
-   The installer will automatically install the Workstation Agent in the Program Files directory and create a configuration folder in ProgramData.
 
 4. **Verify Installation**:  
    - During installation, you can choose to run the Workstation Agent immediately after installation by selecting the "run after install" option.  
@@ -148,7 +141,7 @@ Follow these steps to install Mendix Workstation:
    - Paste the token into the input field in the Workstation Agent to complete the registration.
 
 4. **Test Device Communication**:  
-   - Use the Local Device Testing page in the Workstation Management to verify that devices are available and reachable.  <span style="color:red;">[Maybe mention known issues here? or a link]</span>
+   - Use the Local Device Testing page in the Workstation Management to verify that devices are available and reachable.
    - Connect to a device and test communication by sending or viewing received data.
 
 ---
@@ -162,20 +155,21 @@ Follow these steps to install Mendix Workstation:
 2. **Import the Connector Artifacts**:  
    - Download the **Workstation Connector** and **Interface** modules from the Workstation Management.  
    - In Studio Pro, go to **App Explorer** > **Import Module Package** and import both modules into your app.  
-   - ![Screenshot: Importing Connector Artifacts](path/to/screenshot1.png)
    - Configure the **Management URL** by setting the `CONST_WorkstationManagementUrl` constant in the `StationInterface > constants` section. By default, it points to the public Mendix Workstation Management URL.  
    - Drag and drop the `StationConnector_Security` and `StationConnector_Diagnostics` pages to the home page for easy access.  
 
 3. **Configure the Application in Workstation Management**:  
    - Navigate to the "Stations" section in the Workstation Management.  
-   - Add your application URL (e.g., `http://localhost:8080`, which is the default when running an app locally) to the allowed list under the station's configuration.  
-   - Click on the three dots next to the application and retrieve the **Access Key**.  
-   - ![Screenshot: Adding Application to Allowed List](path/to/screenshot2.png)
-
-4. **Set Up the Shared Secret <span style="color:red;">[Access key]</span> in the Connector**:  
-   - Use the pre-existing page in the StationInterface Module called `StationConnector_Security` to set up the Access Key.  
-   - After deploying the app, locate the **Workstation Connector** settings and save the Access Key. This ensures valid authentication between the connector and the Workstation Agent.  
-   - ![Screenshot: Configuring Shared Secret in Runtime Settings](path/to/screenshot3.png)
+   - Create a station by adding a name and click "Create Station" 
+   - Add your devices in the "Devices" section.  
+   - Add your application URL (e.g., `http://localhost:8080`, which is the default when running an app locally) to the allowed list under the station's configuration.   
+   - Register your computer by clicking the "Register Computer" button and downloading the artifacts. Follow the [Installation Guide](#42-installation-guide) to install the Agent.  
+   - After installation, copy and paste the registration token into the Workstation Agent to complete the registration.  
+   
+4. **Set Up the Access Key in the Connector**:  
+   - Go to the Management and retrieve the Access Key of the application, by clicking on the three dots next to the application and clicking "Show Access Key".  
+   - Use the pre-existing page in the StationInterfaceModule called `StationConnector_Security` to set up the Access Key.  
+   - Make sure to refresh the application after entering the Access Key to ensure the connection is established successfully.  
 
 5. **Interact with Devices**:  
    - Open the `StationConnector_Diagnostics` page in your app to view the list of devices retrieved from the workstation.  
