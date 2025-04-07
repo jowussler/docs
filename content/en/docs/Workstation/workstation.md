@@ -23,7 +23,7 @@ Workstation is especially valuable in manufacturing and industrial environments 
 
 ### 1.2 How It Works
 
-Mendix Workstation consists of **three core components**: the **Workstation Management** for centralized configuration, the **Workstation Agent** for real-time communication with local hardware, and the **Workstation Connector** for app integration. Together, they ensure secure, efficient, and scalable interactions between applications and devices.
+Mendix Workstation consists of **three core components**: the **Workstation Management** for centralized configuration, the **Workstation Client** for real-time communication with local hardware, and the **Workstation Connector** for app integration. Together, they ensure secure, efficient, and scalable interactions between applications and devices.
 
 ---
 
@@ -38,12 +38,12 @@ This makes it easier to manage a large, diverse fleet of devices without the nee
 
 ---
 
-### Workstation Agent
+### Workstation Client
 
 **Used by:**  
 Central IT, support teams, operators, and supervisors
 
-Installed on each local workstation, the **Workstation Agent** acts as a bridge between the Mendix client app and local hardware. It handles the traffic between connected devices and the client application using the configurations provided by the **Workstation Management**.
+Installed on each local workstation, the **Workstation Client** acts as a bridge between the Mendix client app and local hardware. It handles the traffic between connected devices and the client application using the configurations provided by the **Workstation Management**.
 
 ---
 
@@ -52,7 +52,7 @@ Installed on each local workstation, the **Workstation Agent** acts as a bridge 
 **Used by:**  
 Mendix developers
 
-The **App Connector** is a plug-and-play Mendix module that allows developers to connect their apps to local devices using [**nanoflows**](https://docs.mendix.com/refguide/nanoflows/). It establishes a connection with the **Workstation Agent**, which acts as the intermediary between the Mendix app and the local devices. Once this connection is established, the module facilitates seamless data exchange by routing messages and events back and forth between the app and the devices.
+The **App Connector** is a plug-and-play Mendix module that allows developers to connect their apps to local devices using [**nanoflows**](https://docs.mendix.com/refguide/nanoflows/). It establishes a connection with the **Workstation Client**, which acts as the intermediary between the Mendix app and the local devices. Once this connection is established, the module facilitates seamless data exchange by routing messages and events back and forth between the app and the devices.
 
 The connector handles:  
 - Connecting to available devices  
@@ -70,7 +70,7 @@ Together, these components enable Mendix applications to securely and efficientl
 #### 3.2.1 WS Management
 - Features
 - Configurations (create Workspaces, Stations, Devices and Apps)
-#### 3.2.2 WS Agent
+#### 3.2.2 WS Client
 - Features
 - System requirements
 - Installation
@@ -103,7 +103,7 @@ Before installing Mendix Workstation, ensure the following requirements are met:
 - **Network Configuration**:  
   - Ensure the user can access the Mendix cloud.  
   - Open the required ports for communication (e.g., TCP 443 for HTTPS).  
-  - Allowlist the Mendix Workstation Agent in any firewall or antivirus software if applicable.  
+  - Allowlist the Mendix Workstation Client in any firewall or antivirus software if applicable.  
 
 ---
 
@@ -119,8 +119,8 @@ Follow these steps to install Mendix Workstation:
    - During installation or first use, ensure to grant network access or firewall permissions if prompted by the operating system
 
 4. **Verify Installation**:  
-   - During installation, you can choose to run the Workstation Agent immediately after installation by selecting the "run after install" option.  
-   - If the Agent is not running, run it and check if it is available in the system tray. Open it and verify that it is working properly.
+   - During installation, you can choose to run the Workstation Client immediately after installation by selecting the "run after install" option.  
+   - If the Client is not running, run it and check if it is available in the system tray. Open it and verify that it is working properly.
 ---
 
 ### 4.3 Quick Start Tutorial
@@ -135,10 +135,10 @@ Follow these steps to install Mendix Workstation:
    - Navigate to the "Station Overview" section and click "Add Station."  
    - Enter a display name for the station and click "Create Station".
 
-3. **Register the Station to the Agent**:  
-   - Open the Workstation Agent on the local machine. The Agent will display an input field prompting you to enter the registration token.  
+3. **Register the Station to the Client**:  
+   - Open the Workstation Client on the local machine. The Client will display an input field prompting you to enter the registration token.  
    - In the Workstation Management, retrieve the token by clicking the three dots next to the station and selecting "Register Computer."  
-   - Paste the token into the input field in the Workstation Agent to complete the registration.
+   - Paste the token into the input field in the Workstation Client to complete the registration.
 
 4. **Test Device Communication**:  
    - Use the Local Device Testing page in the Workstation Management to verify that devices are available and reachable.
@@ -163,8 +163,8 @@ Follow these steps to install Mendix Workstation:
    - Create a station by adding a name and click "Create Station" 
    - Add your devices in the "Devices" section.  
    - Add your application URL (e.g., `http://localhost:8080`, which is the default when running an app locally) to the allowed list under the station's configuration.   
-   - Register your computer by clicking the "Register Computer" button and downloading the artifacts. Follow the [Installation Guide](#42-installation-guide) to install the Agent.  
-   - After installation, copy and paste the registration token into the Workstation Agent to complete the registration.  
+   - Register your computer by clicking the "Register Computer" button and downloading the artifacts. Follow the [Installation Guide](#42-installation-guide) to install the Client.  
+   - After installation, copy and paste the registration token into the Workstation Client to complete the registration.  
    
 4. **Set Up the Access Key in the Connector**:  
    - Go to the Management and retrieve the Access Key of the application, by clicking on the three dots next to the application and clicking "Show Access Key".  
@@ -184,7 +184,7 @@ Follow these steps to install Mendix Workstation:
 
 Now that you are ready to start using Mendix Workstation, you can implement your own custom logic for interacting with devices. The following nanoflows are essential for establishing connections, sending or receiving messages, and managing device interactions:
 
-- **DS_GetStation**: Retrieves the computer information connected to the Agent.  
+- **DS_GetStation**: Retrieves the computer information connected to the Client.  
 - **SUB_ConnectToDevice**: Establishes a connection to a selected device.  
 - **SUB_SendMessage**: Sends data or commands to the connected device.  
 - **SUB_Disconnect**: Safely disconnects from the device.  
@@ -196,7 +196,7 @@ These nanoflows serve as the core building blocks for integrating devices into y
 ### 4.4 Best Practices [WIP]
 
 - **Security Recommendations**:  
-  - Regularly update the Workstation Agent to the latest version.  
+  - Regularly update the Workstation Client to the latest version.  
   - Enable security in your Mendix app and assign the appropriate roles to the modules to ensure proper access control.  
 
 - **Performance Optimization**:  
