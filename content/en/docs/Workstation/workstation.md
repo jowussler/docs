@@ -119,12 +119,11 @@ Follow these steps to install Mendix Workstation:
    - Visit the official Mendix Workstation page and download the latest version of the installer.<span style="color:red;">[Currently available within the Workstation Management]]</span>
 
 2. **Run the Installer**:  
-   - Double-click the downloaded file and follow the on-screen instructions.  
+   - Double-click the downloaded file and follow the on-screen instructions.
+   - During installation or first use, ensure to grant network access or firewall permissions if prompted by the operating system
    - Accept the license agreement.<span style="color:red;">[Do we have that at the moment? Stephane demoed it]</span>
 
-3. **Install the Workstation Agent**:  
    The installer will automatically install the Workstation Agent in the Program Files directory and create a configuration folder in ProgramData.
-   - Ensure the agent starts running after installation.
 
 4. **Verify Installation**:  
    - During installation, you can choose to run the Workstation Agent immediately after installation by selecting the "run after install" option.  
@@ -149,7 +148,7 @@ Follow these steps to install Mendix Workstation:
    - Paste the token into the input field in the Workstation Agent to complete the registration.
 
 4. **Test Device Communication**:  
-   - Use the Local Device Testing page in the Workstation Management to verify that devices are available and reachable.  
+   - Use the Local Device Testing page in the Workstation Management to verify that devices are available and reachable.  <span style="color:red;">[Maybe mention known issues here? or a link]</span>
    - Connect to a device and test communication by sending or viewing received data.
 
 ---
@@ -163,16 +162,17 @@ Follow these steps to install Mendix Workstation:
    - Download the **Workstation Connector** and **Interface** modules.  
    - In Studio Pro, go to **App Explorer** > **Import Module Package** and import both modules into your app.  
    - ![Screenshot: Importing Connector Artifacts](path/to/screenshot1.png)
+   - Configure the **Management URL** by setting the `CONST_WorkstationManagementUrl` constant in Module `StationInterface > constants` section.  
 
 3. **Configure the Application in Workstation Management**:  
    - Navigate to the "Stations" section in the Workstation Management.  
-   - Add your application (including localhost for local testing) to the allowed list under the station's configuration.  
+   - Add your application URL to the allowed list under the station's configuration.  
    - Click on the three dots next to the application and retrieve the **Access Key**.  
    - ![Screenshot: Adding Application to Allowed List](path/to/screenshot2.png)
 
-4. **Set Up the Shared Secret in the Connector**:   
-   - After deploying the app, locate the **Workstation Connector** settings and add the retrieved **Access Key** as the **Shared Secret**.  
-   - This ensures valid authentication between the connector and the Workstation Agent.  
+4. **Set Up the Shared Secret <span style="color:red;">[Access key]</span> in the Connector**:  
+   - Use the pre-existing page in the StationInterface Module called `StationConnector_Security` to set up the Access Key.  
+   - After deploying the app, locate the **Workstation Connector** settings and save the Access Key. This ensures valid authentication between the connector and the Workstation Agent.  
    - ![Screenshot: Configuring Shared Secret in Runtime Settings](path/to/screenshot3.png)
 
 5. **Retrieve Devices**:  
