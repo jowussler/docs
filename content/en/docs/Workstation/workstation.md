@@ -156,17 +156,19 @@ Follow these steps to install Mendix Workstation:
 #### 4.3.2 Build Your First Mendix Application with Workstation
 
 1. **Create a New Mendix App**:  
-   - Open Mendix Studio Pro and create a new app using a blank or starter template.
+   - Ensure you are using the latest LTS version of Mendix 9 for compatibility and stability.  
+   - Open Mendix Studio Pro and create a new app using a blank or starter template.  
 
 2. **Import the Connector Artifacts**:  
-   - Download the **Workstation Connector** and **Interface** modules.  
+   - Download the **Workstation Connector** and **Interface** modules from the Workstation Management.  
    - In Studio Pro, go to **App Explorer** > **Import Module Package** and import both modules into your app.  
    - ![Screenshot: Importing Connector Artifacts](path/to/screenshot1.png)
-   - Configure the **Management URL** by setting the `CONST_WorkstationManagementUrl` constant in Module `StationInterface > constants` section.  
+   - Configure the **Management URL** by setting the `CONST_WorkstationManagementUrl` constant in the `StationInterface > constants` section. By default, it points to the public Mendix Workstation Management URL.  
+   - Drag and drop the `StationConnector_Security` and `StationConnector_Diagnostics` pages to the home page for easy access.  
 
 3. **Configure the Application in Workstation Management**:  
    - Navigate to the "Stations" section in the Workstation Management.  
-   - Add your application URL to the allowed list under the station's configuration.  
+   - Add your application URL (e.g., `http://localhost:8080`, which is the default when running an app locally) to the allowed list under the station's configuration.  
    - Click on the three dots next to the application and retrieve the **Access Key**.  
    - ![Screenshot: Adding Application to Allowed List](path/to/screenshot2.png)
 
@@ -175,50 +177,33 @@ Follow these steps to install Mendix Workstation:
    - After deploying the app, locate the **Workstation Connector** settings and save the Access Key. This ensures valid authentication between the connector and the Workstation Agent.  
    - ![Screenshot: Configuring Shared Secret in Runtime Settings](path/to/screenshot3.png)
 
-5. **Retrieve Devices**:  
-   - Use the **DS_Station** nanoflow to retrieve the list of devices connected to the workstation.  
-   - Bind the retrieved devices to a data grid or list view in your app.  
-   - ![Screenshot: Configuring DS_Station Nanoflow](path/to/screenshot4.png)
-
-6. **Connect to a Device**:  
-   - Add a button to your app and configure it to call the **SUB_ConnectToDevice** nanoflow.  
-   - Pass the selected device as a parameter to establish a connection.  
-   - ![Screenshot: Configuring SUB_ConnectToDevice Nanoflow](path/to/screenshot5.png)
-
-7. **Send a Message to the Device**:  
-   - Add another button to call the **SUB_SendMessage** nanoflow.  
-   - Use this to send data or commands to the connected device.  
-   - ![Screenshot: Configuring SUB_SendMessage Nanoflow](path/to/screenshot6.png)
-
-8. **Disconnect from the Device**:  
-   - Add a final button to call the **SUB_Disconnect** nanoflow.  
-   - Use this to safely disconnect from the device when done.  
-   - ![Screenshot: Configuring SUB_Disconnect Nanoflow](path/to/screenshot7.png)
-
-9. **Run the App Locally**:  
-   - Run the app locally in Studio Pro.  
-   - Test the functionality by connecting to a device, sending a message, and disconnecting.  
-   - ![Screenshot: Running the App Locally](path/to/screenshot8.png)
-
-10. **Verify Results**:  
-    - Ensure that the app displays the correct device data and handles communication as expected.
+5. **Interact with Devices**:  
+   - Open the `StationConnector_Diagnostics` page in your app to view the list of devices retrieved from the workstation.  
+   - Depending on the device types, you can:  
+     - Connect or disconnect from a device.  
+     - Send messages to a device to test the connection and communication.  
+   - Use this page to verify that the devices are functioning as expected. 
 
 ---
 
-### Key Nanoflows Overview
+### Getting Started with Custom Logic for Device Interaction
 
-- **DS_Station**: Retrieves devices.  
-- **SUB_ConnectToDevice**: Connects to a device.  
-- **SUB_SendMessage**: Sends a message to the device.  
-- **SUB_Disconnect**: Disconnects from the device.
+Now that you are ready to start using Mendix Workstation, you can implement your own custom logic for interacting with devices. The following nanoflows are essential for establishing connections, sending or receiving messages, and managing device interactions:
+
+- **DS_GetStation**: Retrieves the computer information connected to the Agent.  
+- **SUB_ConnectToDevice**: Establishes a connection to a selected device.  
+- **SUB_SendMessage**: Sends data or commands to the connected device.  
+- **SUB_Disconnect**: Safely disconnects from the device.  
+
+These nanoflows serve as the core building blocks for integrating devices into your Mendix applications and tailoring the functionality to your specific requirements.
 
 ---
 
-### 4.4 Best Practices
+### 4.4 Best Practices [WIP]
 
 - **Security Recommendations**:  
   - Regularly update the Workstation Agent to the latest version.  
-  - Use strong passwords and enable two-factor authentication for Mendix accounts.  
+  - Enable security in your Mendix app and assign the appropriate roles to the modules to ensure proper access control.  
 
 - **Performance Optimization**:  
   - Ensure workstations meet the recommended hardware specifications.  
